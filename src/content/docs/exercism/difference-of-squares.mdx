@@ -1,0 +1,129 @@
+---
+title: Difference of Squares
+description: Find the difference between the square of the sum and the sum of the squares of the first N natural numbers.
+---
+
+import { Tabs, TabItem, LinkCard } from '@astrojs/starlight/components';
+
+<Tabs>
+	{/* <TabItem label="py">Sirius, Vega, Betelgeuse</TabItem>
+	<TabItem label="cpp">Io, Europa, Ganymede</TabItem>
+	<TabItem label="java">Io, Europa, Ganymede</TabItem>
+    <TabItem label="go">Io, Europa, Ganymede</TabItem>
+	<TabItem label="ts">Io, Europa, Ganymede</TabItem>
+	<TabItem label="swift">Io, Europa, Ganymede</TabItem>
+    <TabItem label="rs">Io, Europa, Ganymede</TabItem>
+	<TabItem label="kt">Io, Europa, Ganymede</TabItem>
+	<TabItem label="jl">Io, Europa, Ganymede</TabItem>
+	 */}
+	<TabItem label="lua">
+
+		## 문제
+
+		<LinkCard
+		title="Difference of Squares in Lua"
+		description="Find the difference between the square of the sum and the sum of the squares of the first N natural numbers."
+		href="https://exercism.org/tracks/lua/exercises/difference-of-squares"
+		/>
+
+    	## 힌트
+
+    	## 참고할 자료
+
+    	## 해답
+
+		### 명령형
+
+		```lua
+		local function square_of_sum(n) 
+			local result = 0
+			for i=1, n do
+				result = result + i
+			end
+			return result * result
+		end
+
+		local function sum_of_squares(n)
+			local result = 0
+			for i=1, n do
+				result = result + i * i
+			end
+			return result
+		end
+
+		local function difference_of_squares(n)
+			return square_of_sum(n) - sum_of_squares(n)
+		end
+
+		return {
+			square_of_sum = square_of_sum,
+			sum_of_squares = sum_of_squares,
+			difference_of_squares = difference_of_squares
+		}
+		```
+
+		### 함수형
+
+		```lua
+		local function square(n)
+			return n * n
+		end
+
+		local function sum(arr)
+			local result = 0
+			for _, v in pairs(arr) do
+				result = result + v
+			end
+			return result
+		end
+
+		local function map(tbl, f)
+			local t = {}
+			for k,v in pairs(tbl) do
+				t[k] = f(v)
+			end
+			return t
+		end
+
+		local function range(n)
+			a = {}    -- new array
+			for i=1, n do
+				a[i] = i
+			end
+			return a
+		end
+
+		local function square_of_sum(n) 
+			return square(sum(range(n)))
+		end
+
+		local function sum_of_squares(n)
+			return sum(map(range(n), square))
+		end
+
+		local function difference_of_squares(n)
+			return square_of_sum(n) - sum_of_squares(n)
+		end
+
+		return {
+			square_of_sum = square_of_sum,
+			sum_of_squares = sum_of_squares,
+			difference_of_squares = difference_of_squares
+		}
+		```
+
+		### 수학
+
+		```lua
+		```
+
+    </TabItem>
+    {/* 
+	<TabItem label="dart">Io, Europa, Ganymede</TabItem>
+	<TabItem label="clj">Io, Europa, Ganymede</TabItem>
+	<TabItem label="ex">Io, Europa, Ganymede</TabItem>
+	<TabItem label="ml">Io, Europa, Ganymede</TabItem>
+    <TabItem label="st">Io, Europa, Ganymede</TabItem>
+     */}
+
+</Tabs>
