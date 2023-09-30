@@ -1,0 +1,324 @@
+---
+title: Lua
+description: A guide in my new Starlight docs site.
+sidebar:
+  order: 10
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import { YouTube } from 'astro-embed';
+
+<div class="not-content">
+  <YouTube id="https://youtu.be/jUuqBZwwkQw" />
+</div>
+
+```lua
+print("Hello, World!")
+```
+
+```lua
+local function factorial(n)
+    if n == 0 or n == 1 then
+        return 1
+    end
+
+    return n * factorial(n - 1)
+end
+
+local function is_integer(n)
+    return type(n) == "number" and math.floor(n) == n
+end
+
+print("enter a number:")
+local n = assert(io.read("*number"), "your input is not a valid number")
+
+if n < 0 or not is_integer(n) then
+    error("your input is not a non-negative number");
+end
+
+print(factorial(n))
+```
+
+## 공식 문서
+
+<LinkCard
+  title="Lua: Getting started"
+  description="Welcome! Lua is a powerful and fast programming language that is easy to learn and use and to embed into your application."
+  href="https://www.lua.org/"
+/>
+## 루아를 쓰는 곳
+
+### Redis
+
+<LinkCard
+  title="Scripting with Lua | Redis"
+  description="Redis lets users upload and execute Lua scripts on the server."
+  href="https://redis.io/docs/interact/programmability/eval-intro/"
+/>
+
+### Defold : 오픈소스 게임 엔진
+
+<LinkCard
+  title="Lua programming in Defold"
+  description="The Defold engine has the Lua language embedded for scripting."
+  href="https://defold.com/manuals/lua/"
+/>
+
+### NeoVim : 에디터
+
+<LinkCard
+  title="Lua - Neovim docs"
+  description="The Lua 5.1 script engine is builtin and always available."
+  href="https://neovim.io/doc/user/lua.html"
+/>
+<LinkCard
+  title="네오빔에서 루아 사용하기"
+  description="개발 언어로 네오빔에 통합된 루아는 네오빔의 주요한 특징 중 하나로 자리잡고 있습니다. 하지만 루아로 플러그인을 작성하는 방법에 대한 자료는 빔스크립트에 비해 많지 않습니다. 그래서 사람들이 더 쉽게 시작할 수 있도록 기본적인 정보를 제공하려고 합니다."
+  href="https://github.com/krapjost/nvim-lua-guide-kr"
+/>
+
+### OpenResty: 클라우드 플레어의 Nginx 기반 인프라
+
+<LinkCard
+  title="OpenResty®"
+  description="penResty® is a full-fledged web platform that integrates our enhanced version of the Nginx core, our enhanced version of LuaJIT, many carefully written Lua libraries, lots of high quality 3rd-party Nginx modules,"
+  href="https://openresty.org/en/"
+/>
+
+### Hammerspoon : MacOS 자동화
+
+<LinkCard
+  title="Hammerspoon"
+  description="This is a tool for powerful automation of macOS. At its core, Hammerspoon is just a bridge between the operating system and a Lua scripting engine. "
+  href="https://www.hammerspoon.org/"
+/>
+
+## 설치하기
+
+### 패키지 매니저로 설치하기
+
+Exercism은 다양한 언어의 개발환경을 구축하는 법을 소개해주고 있습니다. 루아 설치 가이드를 참고합니다.
+
+<LinkCard
+  title="Exercism : Installing Lua locally"
+  description="Learn how to install Lua locally to solve Exercism's exercises on your own machine"
+  href="https://exercism.org/docs/tracks/lua/installation"
+/>
+
+### 직접 빌드하기
+
+루아는 C 소스 코드를 직접 빌드해서 설치할 수도 있습니다. Mac OS X와 Linux, WSL에서는 다음 명령어를 실행하면 됩니다.
+
+```sh
+curl -R -O http://www.lua.org/ftp/lua-5.1.5.tar.gz
+tar zxf lua-5.1.5.tar.gz
+cd lua-5.1.5
+make all test
+```
+
+윈도우에서는 좀 더 번거롭습니다.
+
+<LinkCard
+  title="Building Lua In Windows For Newbies"
+  description="This is a step-by-step tutorial to get up and running with Lua on Microsoft Windows systems by downloading and compiling the sources using only free tools or tools already present on any Windows installation."
+  href="http://lua-users.org/wiki/BuildingLuaInWindowsForNewbies"
+/>
+
+### LuaJIT
+
+![LuaJIT은 C나 Rust 급의 성능을 낸다](https://luascript-blog-assets.s3.eu-west-2.amazonaws.com/benchmarks.svg)
+동적 언어로 C나 Rust 급의 성능을 내는 것으로 유명한 Just-In-Time 컴파일러로, Lua 5.1 버전을 지원합니다. LuaJIT 은 맥이나 리눅스에서 다음과 같이 간단하게 설치할 수 있습니다.
+
+Lua의 최신 버전은 5.4.6이지만, NeoVim과 Defold 게임엔진을 비롯해 많은 곳에서 Lua 5.1 버전을 사용하고 있습니다. 저희도 LuaJIT과 호환되는 5.1 버전을 사용하려 합니다.
+
+```sh
+git clone https://luajit.org/git/luajit.git
+cd luajit
+make && sudo make install
+```
+
+윈도우에서는 공식 문서를 참고합니다.
+
+<LinkCard
+  title="LuaJIT Installation : Windows Systems"
+  description="Either install one of the open source SDKs (MinGW or Cygwin), which come with a modified GCC plus the required development headers. Or install Microsoft's Visual Studio (MSVC)."
+  href="https://luajit.org/install.html#windows"
+/>
+
+## 튜토리얼
+
+### 사이트
+
+<LinkCard
+  title="Learn Lua in 15 Minutes (한국어판)"
+  description="-- 대시 두 개는 한 줄짜리 주석을 의미합니다."
+  href="https://learnxinyminutes.com/docs/ko-kr/lua-kr/"
+/>
+
+<LinkCard
+  title="Exercism Lua 트랙"
+  description="Lua (pronounced LOO-ah, which means Moon in Portuguese) is a simple yet powerful, lightweight, fast, portable and embeddable scripting language. "
+  href="https://exercism.org/tracks/lua"
+/>
+
+### 책
+
+<LinkCard
+  title="Programming in Lua (first edition)"
+  description="This is the online version of the first edition of the book Programming in Lua, a detailed and authoritative introduction to all aspects of Lua programming written by Lua's chief architect. The first edition was aimed at Lua 5.0."
+  href="https://www.lua.org/pil/contents.html"
+/>
+
+<LinkCard
+  title="Lua 5.1 Reference Manual"
+  description="The reference manual is the official definition of the Lua language. For a complete introduction to Lua programming, see the book Programming in Lua."
+  href="http://www.lua.org/manual/5.1/"
+/>
+
+## 에디터, LSP
+
+편리한 자동완성과 정적 분석 외에도 더 많은 걸 제공합니다!
+
+<LinkCard
+  title="Lua Language Server - Annotations"
+  description="The language server does its best to infer types through contextual analysis, however, sometimes manual documentation is necessary to improve completion and signature information. It does this through LuaCATS (Lua Comment And Type System) annotations, which are based off of EmmyLua annotations ."
+  href="https://luals.github.io/wiki/annotations/"
+/>
+
+```lua
+---@param n number
+---@return number
+local function square_of_sum(n)
+  return square(f.sum(f.range(1, n)))
+end
+```
+
+### VS Code
+
+<LinkCard
+  title="Lua: Visual Studio Marketplace"
+  description="Lua development just got a whole lot better 🧠"
+  href="https://marketplace.visualstudio.com/items?itemName=sumneko.lua"
+/>
+
+### NeoVim
+
+## 패키지 매니저 LuaRock
+
+<LinkCard
+  title="LuaRock - Quick Start"
+  description="If you're just getting started with LuaRocks, these are things you probably want to read first:"
+  href="https://github.com/luarocks/luarocks/wiki/Documentation#user-content-Quick_start"
+/>
+
+LUA_PATH 환경 변수는 다음과 같이 생성해서, `.bashrc`나 `.zshrc`에 환경변수로 추가합니다.
+
+> If you installed both Lua and LuaRocks in their default directories (/usr/local on Linux and Mac OSX), then the "system" tree is /usr/local and it will work by default. However, the "user" tree (for installing rocks without admin privileges) is not detected by Lua by default. For that we'll need to configure these environment variables.
+>
+> LuaRocks offers a semi-automated way to do this. If you type the following command:
+>
+> `luarocks path --bin`
+
+```sh
+# .zshrc 예시
+
+export LUA_PATH='/home/taehee/.asdf/downloads/lua/5.1.5/lua-5.1.5/luarocks-3.9.2/src/?.lua;./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;;/home/taehee/.luarocks/share/lua/5.1/?.lua;/home/taehee/.luarocks/share/lua/5.1/?/init.lua;/home/taehee/.asdf/installs/lua/5.1.5/luarocks/share/lua/5.1/?.lua;/home/taehee/.asdf/installs/lua/5.1.5/luarocks/share/lua/5.1/?/init.lua'
+export LUA_CPATH='./?.so;/usr/local/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/home/taehee/.luarocks/lib/lua/5.1/?.so;/home/taehee/.asdf/installs/lua/5.1.5/luarocks/lib/lua/5.1/?.so'
+
+export PATH="/home/taehee/.luarocks/bin:/home/taehee/.asdf/installs/lua/5.1.5/bin:/home/taehee/.asdf/installs/lua/5.1.5/luarocks/bin:$PATH"
+```
+
+## test
+
+동적 언어에는 test가 필요하죠.
+
+### busted
+
+<LinkCard
+  title="GitHub - lunarmodules/busted"
+  description="Elegant Lua unit testing."
+  href="https://github.com/lunarmodules/busted"
+/>
+
+```lua
+describe('Busted unit testing framework', function()
+  describe('should be awesome', function()
+    it('should be easy to use', function()
+      assert.truthy('Yup.')
+    end)
+
+    it('should have lots of features', function()
+      -- deep check comparisons!
+      assert.same({ table = 'great'}, { table = 'great' })
+
+      -- or check by reference!
+      assert.is_not.equals({ table = 'great'}, { table = 'great'})
+
+      assert.falsy(nil)
+      assert.error(function() error('Wat') end)
+    end)
+
+    it('should provide some shortcuts to common functions', function()
+      assert.unique({{ thing = 1 }, { thing = 2 }, { thing = 3 }})
+    end)
+  end)
+end)
+```
+
+## repl
+
+### croissant
+
+<LinkCard
+  title="GitHub - giann/croissant"
+  description="🥐 A Lua REPL and debugger."
+  href="https://github.com/giann/croissant"
+/>
+
+![](https://github.com/giann/croissant/raw/master/assets/repl.gif)
+
+## inspect
+
+table을 인간이 읽을 수 있는 형태로 toString 해주는 utility
+
+<LinkCard
+  title="GitHub - kikito/inspect.lua"
+  description="Human-readable representation of Lua tables"
+  href="https://github.com/kikito/inspect.lua"
+/>
+
+```lua
+inspect = require('inspect')
+
+print({1,2,3,4}) --> table: 0x56209c00a690
+
+print(inspect({1,2,3,4})) --> "{ 1, 2, 3, 4 }"
+
+print({a=1,b=2}) --> table: 0x55912b975690
+
+print(inspect({a=1,b=2})) --> "{ a = 1, b = 2 }"
+```
+
+## 포매터 LuaFormatter
+
+<LinkCard
+  title="GitHub - Koihik/LuaFormatter"
+  description="Reformats your Lua source code."
+  href="https://github.com/Koihik/LuaFormatter"
+/>
+
+c++ 로 만든 루아 포매터로 vscode, vim 지원
+
+## 린트
+
+<LinkCard
+  title="GitHub - mpeterv/luacheck"
+  description="A tool for linting and static analysis of Lua code."
+  href="https://github.com/mpeterv/luacheck"
+/>
+
+## ffi
+
+### lua에서 C++, Rust, zig 함수 사용하기
+
+### C++, Rust, zig에서 lua 함수 사용하기

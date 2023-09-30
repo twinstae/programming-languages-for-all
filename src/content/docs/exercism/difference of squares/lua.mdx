@@ -1,0 +1,207 @@
+---
+title: Difference of Squares in Lua
+
+sidebar:
+  label: Lua
+  order: 10
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+## 문제
+
+<LinkCard
+  title="Difference of Squares in Lua"
+  description="Find the difference between the square of the sum and the sum of the squares of the first N natural numbers."
+  href="https://exercism.org/tracks/lua/exercises/difference-of-squares"
+/>
+
+## 참고할 자료와 개념
+
+- [Learn Lua in Y Minutes](https://learnxinyminutes.com/docs/ko-kr/lua-kr)
+
+### for 문
+
+- [Programming in Lua : 4.3.4 - Numeric for](https://www.lua.org/pil/4.3.4.html)
+
+```lua
+local total = 0
+for i = 1, 10 do -- 마지막의 10을 포함합니다.
+	total = total + i -- lua에는 += 이 없습니다
+end
+print(total) --> 55
+```
+
+### 함수 정의하기
+
+- [Programming in Lua : 5 - Functions](https://www.lua.org/pil/5.html)
+
+```lua
+function add(a,b)
+	return a + b
+end -- 중괄호는 없고 function으로 시작해서 end로 끝납니다.
+
+print(add(1,1)) --> 2
+```
+
+### 일급함수와 클로저
+
+- [Programming in Lua : 6 - More about Functions](https://www.lua.org/pil/6.html)
+
+```lua
+function add3(a) return add(a, 3) end
+print(add3(1)) --> 4
+
+add2 = function (a) return add(a, 2) end
+print(add2(1)) --> 3
+```
+
+## 풀이된 예제
+
+### 명령형
+
+```lua
+local function square_of_sum(n)
+	local result = 0
+	for i=1, n do
+		result = result + i
+	end
+	return result * result
+end
+
+local function sum_of_squares(n)
+	local result = 0
+	for i=1, n do
+		result = result + i * i
+	end
+	return result
+end
+
+local function difference_of_squares(n)
+	return square_of_sum(n) - sum_of_squares(n)
+end
+
+return {
+	square_of_sum = square_of_sum,
+	sum_of_squares = sum_of_squares,
+	difference_of_squares = difference_of_squares
+}
+```
+
+### 함수형
+
+```lua
+--    > return square(4)
+--    16
+local function square(n)
+	return n * n
+end
+
+--    > return sum({1,2,3})
+--    6
+local function sum(arr)
+	local result = 0
+	for _, v in pairs(arr) do
+		result = result + v
+	end
+	return result
+end
+
+--    > return map({1,2,3}, function (x) return 2 * x end)
+--    {2,4,6}
+local function map(table, f)
+	local t = {}
+	for k,v in pairs(table) do
+		t[k] = f(v)
+	end
+	return t
+end
+
+--    > return range(3)
+--    {1,2,3}
+local function range(n)
+	local a = {}    -- new array
+	for i=1, n do
+		a[i] = i
+	end
+	return a
+end
+
+local function square_of_sum(n)
+	return square(sum(range(n)))
+end
+
+local function sum_of_squares(n)
+	return sum(map(range(n), square))
+end
+
+local function difference_of_squares(n)
+	return square_of_sum(n) - sum_of_squares(n)
+end
+
+return {
+	square_of_sum = square_of_sum,
+	sum_of_squares = sum_of_squares,
+	difference_of_squares = difference_of_squares
+}
+```
+
+### 함수형 라이브러리
+
+<LinkCard
+  title="github luafun/luafun"
+  description="Lua Fun is a high-performance functional programming library for Lua designed with LuaJIT's trace compiler in mind."
+  href="https://github.com/luafun/luafun"
+/>
+
+```lua
+local f = require( 'fun')
+
+local function square(n)
+	return n * n
+end
+
+local function square_of_sum(n)
+	return square(f.sum(f.range(1, n)))
+end
+
+local function sum_of_squares(n)
+	return f.sum(f.map(square, f.range(1, n)))
+end
+
+local function difference_of_squares(n)
+	return square_of_sum(n) - sum_of_squares(n)
+end
+
+return {
+	square_of_sum = square_of_sum,
+	sum_of_squares = sum_of_squares,
+	difference_of_squares = difference_of_squares
+}
+```
+
+### 수학
+
+- [수학방 : 등차수열의 합 공식](https://mathbang.net/609#gsc.tab=0)
+- [수학방 : 자연수 거듭제곱의 합 공식, 유도](https://mathbang.net/628#gsc.tab=0)
+
+```lua
+local function square_of_sum(n)
+	local total = n * (1 + n) / 2
+	return total * total
+end
+
+local function sum_of_squares(n)
+	return n * (n + 1) * (2 * n + 1) / 6
+end
+
+local function difference_of_squares(n)
+	return square_of_sum(n) - sum_of_squares(n)
+end
+
+return {
+	square_of_sum = square_of_sum,
+	sum_of_squares = sum_of_squares,
+	difference_of_squares = difference_of_squares
+}
+```

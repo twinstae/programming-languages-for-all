@@ -1,0 +1,227 @@
+---
+title: Elixir
+description: A guide in my new Starlight docs site.
+sidebar:
+  order: 13
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import { YouTube } from 'astro-embed';
+
+<div class="not-content">
+  <YouTube id="https://www.youtube.com/watch?v=R7t7zca8SyM" />
+</div>
+
+```elixir
+IO.puts("Hello, World!")
+```
+
+```elixir
+defmodule Factorial do
+  def of(n) do
+    case n do
+      0 -> 1
+      1 -> 1
+      n -> n * of(n - 1)
+    end
+  end
+end
+
+IO.puts("enter a number:")
+
+number = case Integer.parse(IO.read(:stdio, :line)) do
+    :error -> raise "Invalid input. Please enter a valid non-negative integer."
+    {n, _} when n < 0 -> raise "Invalid input. Please enter a non-negative integer."
+    {n, _} -> n
+end
+
+IO.puts(Factorial.of(number))
+```
+
+## 공식 문서
+
+<LinkCard
+  title="The Elixir programming language"
+  description="Elixir is a dynamic, functional language for building scalable and maintainable applications."
+  href="https://elixir-lang.org/"
+/>
+
+## 엘릭서를 쓰는 곳
+
+### Discord
+
+<LinkCard
+  title="Real time communication at scale with Elixir at Discord"
+  href="https://elixir-lang.org/blog/2020/10/08/real-time-communication-at-scale-with-elixir-at-discord/"
+/>
+
+### Pinterest
+
+<LinkCard
+  title="Elixir가 Pinterest의 서버 비용을 년간 $2M(26억원) 절감"
+  description="200개의 파이썬 서버에서 실행되던 시스템중 하나가 이제 4대의 Elixir 서버에서 실행"
+  href="https://paraxial.io/blog/elixir-savings"
+/>
+
+### fly.io 클라우드 인프라
+
+<LinkCard
+  title="fly.io - The Phoenix Files"
+  href="https://fly.io/phoenix-files/"
+/>
+
+### 한국 축산 데이터
+
+<LinkCard
+  title="liftIO 2022 : 웹 개발의 모순과 Elixir가 특효약인 이유 - 한국축산데이터 CTO Max(이재철)"
+  description="현재 유행하는 frontend, backend 언어들과 아키텍쳐를 돌아보고, 기술 발전 과정에서 어떤 비효율성이 뿌리 박히게 됐는지 검토합니다. 그리고 Elixir가 어떻게 그 문제들을 해결할수 있는지에 대해서 논의합니다."
+  href="https://www.youtube.com/watch?v=lAaD-6OQSHE"
+/>
+
+## 설치하기
+
+<LinkCard
+  title="Installing Elixir"
+  description="The quickest way to install Elixir is through a distribution or using one of the available installers. "
+  href="https://elixir-lang.org/install.html"
+/>
+
+## 튜토리얼
+
+### 사이트
+
+<LinkCard
+  title="Learn elixir in 15 Minutes"
+  description="# Single line comments start with a number symbol."
+  href="https://learnxinyminutes.com/docs/elixir/"
+/>
+
+<LinkCard
+  title="공식 Guides - The Elixir programming language"
+  description="In this tutorial, we are going to teach you about Elixir fundamentals - the language syntax, how to define modules, how to manipulate the characteristics of common data structures, and more."
+  href="https://elixir-lang.org/getting-started/introduction.html"
+/>
+
+<LinkCard
+  title="Exercism elixir 트랙"
+  description="Elixir, initially released in 2012, extends upon the already robust features of Erlang while also being easier for beginners to access, read, test, and write."
+  href="https://exercism.org/tracks/lua"
+/>
+
+<LinkCard
+  title="Elixir School 한국어 번역"
+  description="Elixir는 환상적인 언어 입니다만, 저희가 하는 말만 들으실 게 아니라 여러분과 여러분의 조직이 Elixir를 도입해야 하는 몇 가지 이유를 직접 살펴보세요."
+  href="https://elixirschool.com/ko/why"
+/>
+
+<LinkCard
+  title="Elixir Koans"
+  description="Elixir koans is a fun way to get started with the elixir programming language."
+  href="https://github.com/elixirkoans/elixir-koans"
+/>
+
+### 책
+
+<LinkCard
+  title="처음 배우는 엘릭서 프로그래밍 - 데이브 토머스"
+  description="<img src='https://image.yes24.com/goods/108025068/XL' width='120'/>"
+  href="https://www.lua.org/pil/contents.html"
+/>
+
+<LinkCard
+  title="Elixir in Action, Second Edition"
+  description="Revised and updated for Elixir 1.7, Elixir in Action, Second Edition teaches you how to apply Elixir to practical problems associated with scalability, fault tolerance, and high availability."
+  href="https://www.manning.com/books/elixir-in-action-second-edition"
+/>
+
+<LinkCard
+  title="Joy of Elixir"
+  description="Hello! Joy of Elixir is a gentle introduction to programming, aimed at people who already know some things about computers, but who have little-to-no programming experience. "
+  href="https://joyofelixir.com/toc.html"
+/>
+
+## 에디터, LSP
+
+편리한 자동완성과 정적 분석 외에도 더 많은 걸 제공합니다!
+
+<LinkCard
+  title="Elixir Language Server"
+  description="A frontend-independent IDE 'smartness' server for Elixir."
+  href="https://luals.github.io/wiki/annotations/"
+/>
+
+### VS Code
+
+<LinkCard
+  title="ElixirLS: Elixir support and debugger"
+  href="https://marketplace.visualstudio.com/items?itemName=JakeBecker.elixir-ls"
+/>
+
+## 빌드 도구 mix
+
+엘릭서는 공식적으로 빌드, 패키지 매니저, 테스트, 리플, 포매터 등의 도구를 제공합니다.
+
+<LinkCard
+  title="Mix"
+  description="Mix is a build tool that provides tasks for creating, compiling, and testing Elixir projects, managing its dependencies, and more."
+  href="https://hexdocs.pm/mix/Mix.html"
+/>
+
+## 패키지 매니저 hex
+
+<LinkCard
+  title="Hex"
+  description="The package manager for the Erlang ecosystem"
+  href="https://hex.pm/"
+/>
+
+## 테스트 ExUnit
+
+동적 언어에는 test가 필요하죠.
+
+<LinkCard
+  title="ExUnit"
+  description="Unit testing framework for Elixir."
+  href="https://github.com/lunarmodules/busted"
+/>
+
+```elixir
+defmodule ExampleTest do
+  use ExUnit.Case
+  doctest Example
+
+  test "greets the world" do
+    assert Example.hello() == :world
+  end
+end
+```
+
+## 리플 iex
+
+<LinkCard
+  title="IEx"
+  description="Elixir's interactive shell."
+  href="https://hexdocs.pm/iex/1.14/IEx.html"
+/>
+
+<LinkCard
+  title="엘릭서 스쿨 - IEx Helpers"
+  description="Elixir를 사용하기 시작하면 IEx는 가장 좋은 친구가 되어 줍니다. IEx는 REPL이며, 새로운 코드를 확인하거나, 개발을 진행할 때 이를 쉽게 만들어주는 많은 고급 기능을 가지고 있습니다."
+  href="https://elixirschool.com/ko/lessons/basics/iex_helpers"
+/>
+
+## 포매터 mix format
+
+<LinkCard
+  title="mix format"
+  description="Formats the given files and patterns."
+  href="https://hexdocs.pm/mix/main/Mix.Tasks.Format.html"
+/>
+
+## 린트
+
+<LinkCard
+  title="GitHub - rrrene/credo"
+  description="A static code analysis tool for the Elixir language with a focus on code consistency and teaching."
+  href="https://github.com/rrrene/credo"
+/>

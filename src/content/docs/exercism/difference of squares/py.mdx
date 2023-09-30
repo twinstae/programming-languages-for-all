@@ -1,0 +1,110 @@
+---
+title: Difference of Squares in Python
+
+sidebar:
+  label: Python
+  order: 1
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+## 문제
+
+<LinkCard
+  title="Difference of Squares in Python"
+  description="Find the difference between the square of the sum and the sum of the squares of the first N natural numbers."
+  href="https://exercism.org/tracks/python/exercises/difference-of-squares"
+/>
+
+## 참고할 자료와 개념
+
+- [Learn Python in Y Minutes](https://learnxinyminutes.com/docs/python/)
+- [python 공식 문서 Tutorial : 4.3 range](https://docs.python.org/ko/3.11/tutorial/controlflow.html#the-range-function)
+- [python 공식 문서 내장 함수 : sum](https://docs.python.org/ko/3.11/library/functions.html#sum)
+- [python 공식 문서 내장 함수 : map](https://docs.python.org/ko/3.11/library/functions.html#map)
+- [python 공식 문서 Tutorial : 4.8.6. 람다 표현식](https://docs.python.org/ko/3.11/tutorial/controlflow.html#lambda-expressions)
+- [python 공식 문서 Tutorial : 5.1.3. List Comprehensions](https://docs.python.org/ko/3.11/tutorial/datastructures.html#list-comprehensions)
+
+## 풀이된 예제
+
+### 명령형
+
+```py
+def square_of_sum(number):
+	total = 0
+	for n in range(1, number + 1):
+		total += n
+	return total * total
+
+def sum_of_squares(number):
+	result = 0
+	for n in range(1, number + 1):
+		result += n * n
+	return result
+
+def difference_of_squares(number):
+	return square_of_sum(number) - sum_of_squares(number)
+```
+
+### pythonic iterartor
+
+```py
+def square_of_sum(number):
+	return sum(range(1, number + 1)) ** 2
+
+def sum_of_squares(number):
+	return sum(n * n for n in range(1, number + 1))
+
+def difference_of_squares(number):
+	return square_of_sum(number) - sum_of_squares(number)
+```
+
+### map과 lambda
+
+```py
+def square_of_sum(number):
+	return sum(range(1, number + 1)) ** 2
+
+def sum_of_squares(number):
+	return sum(map(lambda n: n * n, range(1, number + 1)))
+
+def difference_of_squares(number):
+	return square_of_sum(number) - sum_of_squares(number)
+```
+
+### 수학
+
+- [수학방 : 등차수열의 합 공식](https://mathbang.net/609#gsc.tab=0)
+- [수학방 : 자연수 거듭제곱의 합 공식, 유도](https://mathbang.net/628#gsc.tab=0)
+
+```py
+def square_of_sum(number):
+	return (n * (n + 1) / 2) ** 2
+
+def sum_of_squares(number):
+	return n * (n + 1) * (2 * n + 1) / 6
+
+def difference_of_squares(number):
+	return square_of_sum(number) - sum_of_squares(number)
+```
+
+    {/*
+    <TabItem label="cpp">Io, Europa, Ganymede</TabItem>
+    <TabItem label="java">Io, Europa, Ganymede</TabItem>
+    <TabItem label="go">Io, Europa, Ganymede</TabItem>
+    <TabItem label="ts">Io, Europa, Ganymede</TabItem>
+    <TabItem label="swift">Io, Europa, Ganymede</TabItem>
+     */}
+    {/*
+    <TabItem label="kt">Io, Europa, Ganymede</TabItem>
+    <TabItem label="jl">Io, Europa, Ganymede</TabItem>
+     */}
+
+
+    {/*
+    <TabItem label="dart">Io, Europa, Ganymede</TabItem>
+    <TabItem label="clj">Io, Europa, Ganymede</TabItem>
+    <TabItem label="ex">Io, Europa, Ganymede</TabItem>
+    <TabItem label="ml">Io, Europa, Ganymede</TabItem>
+    <TabItem label="st">Io, Europa, Ganymede</TabItem>
+     */}

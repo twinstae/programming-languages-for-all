@@ -1,0 +1,57 @@
+---
+title: JavaScript
+description: A guide in my new Starlight docs site.
+sidebar:
+  order: 5
+  hidden: true
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import { YouTube } from 'astro-embed';
+
+<div class="not-content">
+  <YouTube id="https://www.youtube.com/watch?v=x7X9w_GIm1s" />
+</div>
+
+```javascript
+console.log('Hello, World!');
+```
+
+```javascript
+import readline from 'node:readline';
+
+function factorial(n) {
+  let result = 1;
+  for (let i = 1; i <= n; i++) {
+    result *= i;
+  }
+  return result;
+}
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+const input = new Promise((resolve) =>
+  rl.question('enter a number:\n', resolve)
+);
+input
+  .then((raw) => {
+    const n = parseInt(raw);
+
+    if (isNaN(n)) {
+      throw Error('your input is not a valid number');
+    }
+    if (n < 0) {
+      throw Error('your input is not a non-negative number');
+    }
+
+    return factorial(n);
+  })
+  .then(console.log)
+  .catch(console.error)
+  .finally(() => {
+    rl.close();
+  });
+```

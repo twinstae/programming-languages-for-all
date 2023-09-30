@@ -1,6 +1,7 @@
 ---
-title: Python
+title: Zig
 description: A guide in my new Starlight docs site.
 sidebar:
-  order: 1
+  order: 16
+  hidden: true
 ---

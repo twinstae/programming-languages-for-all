@@ -1,0 +1,105 @@
+---
+title: Difference of Squares in Rust
+
+sidebar:
+  label: Rust
+  order: 7
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+## 문제
+
+<LinkCard
+  title="Difference of Squares in Rust"
+  description="Find the difference between the square of the sum and the sum of the squares of the first N natural numbers."
+  href="https://exercism.org/tracks/rust/exercises/difference-of-squares"
+/>
+
+## 참고할 자료와 개념
+
+- [Learn Rust in Y Minutes](https://learnxinyminutes.com/docs/rust/)
+
+### for 문
+
+- `1..n`과 `1..=n`의 차이
+- The Rust Programming Language
+  - [ch3 Common Programming Concepts](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)
+- Easy Rust
+  - [Easy Rust - 27.Loops](https://dhghomon.github.io/easy_rust/Chapter_26.html)
+  - [유튜브, 프로그래밍 언어 러스트를 배웁시다! 037 Easy Rust in Korean: Loops](https://www.youtube.com/watch?v=11yZ9n7m0uU&list=PLfllocyHVgsSJf1zO6k6o3SX2mbZjAqYE&index=37)
+
+### (심화) iterator, closure, map, sum
+
+- The Rust Programming Language
+  - [13.1 Closures: Anonymous Functions that Capture Their Environment](https://doc.rust-lang.org/book/ch13-01-closures.html)
+  - [13.2 Processing a Series of Items with Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)
+  - [13.4 Comparing Performance: Loops vs. Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html)
+  - [Appendix B: Operators and Symbols](https://doc.rust-lang.org/book/appendix-02-operators.html?highlight=range#operators)
+- Easy Rust
+  - [37.Itertors](https://dhghomon.github.io/easy_rust/Chapter_36.html)
+  - [유튜브, 070 Easy Rust in Korean: Iterators and assert_eq!](https://www.youtube.com/watch?v=50mrYgeXg3s&list=PLfllocyHVgsSJf1zO6k6o3SX2mbZjAqYE&index=70)
+  - [38.Closures](https://dhghomon.github.io/easy_rust/Chapter_37.html)
+  - [유튜브, 072 Easy Rust in Korean: Intro to closures](https://www.youtube.com/watch?v=NJnLPaX7UOs&list=PLfllocyHVgsSJf1zO6k6o3SX2mbZjAqYE&index=72)
+
+## 풀이된 예제
+
+### 명령형
+
+```rust
+pub fn square_of_sum(n: u32) -> u32 {
+    let mut sum = 0;
+    for i in 1..=n {
+        sum += i;
+    }
+    sum * sum
+}
+
+pub fn sum_of_squares(n: u32) -> u32 {
+    let mut sum = 0;
+    for i in 1..=n {
+        sum += i * i;
+    }
+    sum
+}
+
+pub fn difference(n: u32) -> u32 {
+    square_of_sum(n) - sum_of_squares(n)
+}
+```
+
+### 함수형 이터레이터
+
+```rust
+pub fn square_of_sum(n: u32) -> u32 {
+    (1..=n).sum::<u32>().pow(2)
+}
+
+pub fn sum_of_squares(n: u32) -> u32 {
+    (1..=n).map(|x| x.pow(2)).sum()
+}
+
+pub fn difference(n: u32) -> u32 {
+    square_of_sum(n) - sum_of_squares(n)
+}
+```
+
+### 수학
+
+- [수학방 : 등차수열의 합 공식](https://mathbang.net/609#gsc.tab=0)
+- [수학방 : 자연수 거듭제곱의 합 공식, 유도](https://mathbang.net/628#gsc.tab=0)
+
+```rust
+pub fn square_of_sum(n: u32) -> u32 {
+    (n * (n + 1) / 2).pow(2)
+}
+
+pub fn sum_of_squares(n: u32) -> u32 {
+    n * (n + 1) * (2 * n + 1) / 6
+}
+
+pub fn difference(n: u32) -> u32 {
+    square_of_sum(n) - sum_of_squares(n)
+}
+
+```

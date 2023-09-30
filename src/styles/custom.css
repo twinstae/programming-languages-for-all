@@ -1,3 +1,8 @@
 :root {
     --sl-content-width: 60rem;
 }
+
+.not-content lite-youtube {
+    width: 100%;
+    max-width: 100%;
+}

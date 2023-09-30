@@ -1,0 +1,55 @@
+---
+title: Go
+description: A guide in my new Starlight docs site.
+sidebar:
+  order: 4
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import { YouTube } from 'astro-embed';
+
+<div class="not-content">
+  <YouTube id="https://www.youtube.com/watch?v=446E-r0rXHI" />
+</div>
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, World!")
+}
+```
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+)
+
+func factorial(n int) int {
+	result := 1
+	for i:=1; i<=n; i++ {
+		result *= i
+	}
+    return result
+}
+
+func main() {
+
+	fmt.Println("enter a number:")
+	var number int
+	_, err := fmt.Scanln(&number)
+	if err != nil {
+		log.Fatal("Invalid input. Please enter a valid non-negative integer.")
+	}
+	if number < 0 {
+		log.Fatal("Invalid input. Please enter a non-negative integer.")
+	}
+
+	fmt.Println(factorial(number))
+}
+```

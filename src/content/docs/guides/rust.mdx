@@ -1,0 +1,177 @@
+---
+title: Rust
+description: A guide in my new Starlight docs site.
+sidebar:
+  order: 7
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+import { YouTube } from 'astro-embed';
+
+<div class="not-content">
+  <YouTube id="https://youtu.be/5C_HPTJg5ek?si=UYXDC9zokE_rimxF" />
+</div>
+
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+
+```rust
+use std::io;
+
+fn factorial(num: u64) -> u64 {
+    match num {
+        0 | 1 => 1,
+        _ => factorial(num - 1) * num,
+    }
+}
+
+fn main() {
+    let mut user_input = String::new();
+
+    println!("enter a number:");
+    match io::stdin().read_line(&mut user_input) {
+        Ok(_) => (),
+        Err(_e) => {
+            println!("error: {}", _e);
+            return;
+        }
+    };
+    let num: u64 = match user_input.trim().parse::<u64>() {
+        Ok(n) => n,
+        Err(_e) => {
+            println!("'{}' is not a valid positive integer, full error: {}", user_input, _e);
+            return;
+        }
+    };
+
+    if n > 65 {
+        println!("cannot compute more than fact(65)");
+        return;
+    }
+
+    println!("{}", factorial(num));
+}
+```
+
+## 공식 문서
+
+<LinkCard
+  title="Rust"
+  description="Rust A language empowering everyone to build reliable and efficient software."
+  href="https://www.rust-lang.org/"
+/>
+
+## Rust를 쓰는 곳은 매우 많다
+
+## 개발 환경 구축
+
+<LinkCard
+  title="Install Rust - Using rustup (Recommended)"
+  href="https://www.rust-lang.org/tools/install"
+/>
+
+## 튜토리얼
+
+<LinkCard
+  title="Learn Rust in 15 Minutes"
+  description="Rust is a programming language developed by Mozilla Research."
+  href="https://learnxinyminutes.com/docs/rust/"
+/>
+
+<LinkCard
+  title="Easy Rust"
+  description="Rust is a new language that already has good textbooks. But sometimes its textbooks are difficult because they are for native English speakers."
+  href="https://dhghomon.github.io/easy_rust/Chapter_1.html"
+/>
+
+<LinkCard
+  title="Easy Rust 한국어 강의 영상 (Youtube)"
+  href="https://www.youtube.com/watch?v=W9DO6m8JSSs&list=PLfllocyHVgsSJf1zO6k6o3SX2mbZjAqYE"
+/>
+
+<LinkCard
+  title="The Rust Programming Language 2판 한국어 번역"
+  description="It wasn’t always so clear, but the Rust programming language is fundamentally about empowerment"
+  href="https://rinthel.github.io/rust-lang-book-ko/"
+/>
+
+<LinkCard
+  title="Rust By Example 한국어 번역"
+  description="Rust is a modern systems programming language focusing on safety, speed, and concurrency."
+  href="https://hanbum.gitbooks.io/rustbyexample/content/"
+/>
+
+<LinkCard
+  title="Github - rust-lang/rustlings"
+  description="🦀 Small exercises to get you used to reading and writing Rust code!"
+  href="https://github.com/rust-lang/rustlings"
+/>
+
+<LinkCard
+  title="Exercism Rust 트랙"
+  description="Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety."
+  href="https://exercism.org/tracks/rust"
+/>
+
+<LinkCard
+  title="한 줄 한 줄 짜면서 익히는 러스트 프로그래밍"
+  description="러스트로 하는 시스템 프로그래밍에 대한 실무형 안내서이다. 문법과 구조를 넘어 실세계에서 사용되는 사례를 제공한다."
+  href="https://www.yes24.com/Product/Goods/110368348"
+/>
+
+<LinkCard
+  title="Programming Rust, 2nd Edition"
+  description="Systems programming provides the foundation for the world's computation."
+  href="https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/"
+/>
+
+<LinkCard
+  title="The Rust Reference"
+  description="This book is the primary reference for the Rust programming language."
+  href="https://doc.rust-lang.org/reference/index.html"
+/>
+
+## 에디터, LSP
+
+<LinkCard
+  title="rust analyzer"
+  description="Bringing a great IDE experience to the Rust programming language."
+  href="https://rust-analyzer.github.io/"
+/>
+
+## 패키지 매니저 cargo
+
+<LinkCard
+  title="The Cargo Book"
+  description="Cargo is the Rust package manager. "
+  href="https://doc.rust-lang.org/cargo/"
+/>
+
+## 테스트 cargo test
+
+<LinkCard
+  title="The Rust Programming Language - 11. 테스팅"
+  description="러스트의 타입 시스템은 이 짐의 큰 부분을 짊어지고 있지만, 타입 시스템이 모든 종류의 부정확성을 잡아낼 수는 없습니다."
+  href="https://rinthel.github.io/rust-lang-book-ko/ch11-00-testing.html"
+/>
+
+```rust
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn it_works() {
+        assert_eq!(2 + 2, 4);
+    }
+}
+```
+
+## 린트 clippy
+
+<LinkCard
+  title="rust-clippy"
+  description="A bunch of lints to catch common mistakes and improve your Rust code."
+  href="https://github.com/rust-lang/rust-clippy"
+/>
