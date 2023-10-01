@@ -1,0 +1,79 @@
+---
+title: Binary Search in Lua
+
+sidebar:
+  label: Lua
+  order: 10
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+## 문제
+
+<LinkCard
+  title="Binary Search in Lua"
+  description="You have stumbled upon a group of mathematicians who are also singer-songwriters."
+  href="https://exercism.org/tracks/lua/exercises/binary-search"
+/>
+
+## 참고할 자료와 개념
+
+- [Learn Lua in Y Minutes](https://learnxinyminutes.com/docs/ko-kr/lua-kr)
+
+## 풀이된 예제
+
+### 명령형
+
+```lua
+--- @param array number[] 정렬된 number array table
+--- @param target number 찾으려는 숫자
+local function binary_search(array, target)
+    local left = 1
+    local right = #array
+    while (left <= right) do
+        local mid = math.floor((left + right) / 2)
+        local value = array[mid]
+
+        if target == value then
+            return mid
+        elseif target < value then
+            right = mid - 1
+        else
+            left = mid + 1
+        end
+    end
+    return -1
+end
+
+return binary_search
+
+-- 9 successes / 0 failures / 0 errors / 0 pending : 0.001203 seconds
+```
+
+### 함수형
+
+```lua
+--- @param array number[] 정렬된 number array table
+--- @param target number 찾으려는 숫자
+local function binary_search(array, target)
+    local function go(left, right)
+        if left > right then return -1 end
+
+        local mid = math.floor((right + left) / 2)
+        local value = array[mid]
+
+		if target == value then
+            return mid
+        elseif target < value then
+            return go(left, mid - 1)
+        else
+            return go(mid + 1, right)
+        end
+    end
+    return go(1, #array)
+end
+
+return binary_search
+
+-- 9 successes / 0 failures / 0 errors / 0 pending : 0.001228 seconds
+```

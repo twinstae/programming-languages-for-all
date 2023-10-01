@@ -1,0 +1,95 @@
+---
+title: Matrix in Lua
+
+sidebar:
+  label: Lua
+  order: 10
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+## 문제
+
+<LinkCard
+  title="Matrix in Lua"
+  description="You have stumbled upon a group of mathematicians who are also singer-songwriters."
+  href="https://exercism.org/tracks/lua/exercises/matrix"
+/>
+
+## 참고할 자료와 개념
+
+- [Learn Lua in Y Minutes](https://learnxinyminutes.com/docs/ko-kr/lua-kr)
+- [StackOverflow - Split string in Lua?](https://stackoverflow.com/questions/1426954/split-string-in-lua)
+- [Programming in Lua - 2.5 Tables](https://www.lua.org/pil/2.5.html)
+- [Programming in Lua - 4.3.5 Generic for](https://www.lua.org/pil/4.3.5.html)
+- [Programming in Lua - 16 Object-Oriented Programming](https://www.lua.org/pil/16.html)
+- [Programming in Lua - 19.2 Insert and Remove](https://www.lua.org/pil/19.2.html)
+- [Programming in Lua - 20.1 Pattern-Matching Functions](https://www.lua.org/pil/20.1.html)
+- [Lua 5.1 Reference Manual - string.gmatch](https://www.lua.org/manual/5.1/manual.html#pdf-string.gmatch)
+
+## 풀이된 예제
+
+### 명령형
+
+```lua
+return function(s)
+    ---@type number[][]
+    local rows = {}
+
+    for line in s:gmatch('[%d ]+') do
+        local row = {}
+        for r in line:gmatch('%d+') do table.insert(row, tonumber(r)) end
+        table.insert(rows, row)
+    end
+
+    return {
+        row = function(index) return rows[index] end,
+        column = function(index)
+            local result = {}
+            for _, r in ipairs(rows) do
+                table.insert(result, r[index])
+            end
+            return result
+        end
+    }
+end
+
+-- 4 successes / 0 failures / 0 errors / 0 pending : 0.000674 seconds
+```
+
+### 함수형
+
+```lua
+local function map(table, f)
+    local t = {}
+    for k, v in pairs(table) do t[k] = f(v) end
+    return t
+end
+
+local function split(s, sep)
+    if sep == nil then sep = "%s" end
+    local t = {}
+    for str in string.gmatch(s, "([^" .. sep .. "]+)") do
+        table.insert(t, str)
+    end
+    return t
+end
+
+return function(s)
+    ---@type number[][]
+    local rows = map(split(s, "\n"), function(line)
+        return map(split(line, " "), function(n) return tonumber(n) end)
+    end)
+
+    return {
+        --- @return number[]
+        row = function(index) return rows[index] end,
+        --- @return number[]
+        column = function(index)
+            return map(rows, function(row) return row[index] end)
+        end
+    }
+end
+
+-- 4 successes / 0 failures / 0 errors / 0 pending : 0.000671 seconds
+```
