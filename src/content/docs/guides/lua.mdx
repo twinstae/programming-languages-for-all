@@ -29,14 +29,14 @@ local function is_integer(n)
     return type(n) == "number" and math.floor(n) == n
 end
 
-print("enter a number:")
+io.write("enter a number:\n")
 local n = assert(io.read("*number"), "your input is not a valid number")
 
 if n < 0 or not is_integer(n) then
     error("your input is not a non-negative number");
 end
 
-print(factorial(n))
+io.write(factorial(n))
 ```
 
 ## 공식 문서
@@ -276,6 +276,16 @@ end)
 />
 
 ![](https://github.com/giann/croissant/raw/master/assets/repl.gif)
+
+## xeus lua notebook
+
+<LinkCard
+  title="GitHub - jupyter-xeus/xeus-lua"
+  description="Jupyter kernel for the Lua programming language"
+  href="https://github.com/jupyter-xeus/xeus-lua"
+/>
+
+![](https://github.com/jupyter-xeus/xeus-lua/raw/main/docs/source/execute.gif)
 
 ## inspect
 
