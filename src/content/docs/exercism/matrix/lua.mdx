@@ -82,9 +82,9 @@ return function(s)
     end)
 
     return {
-        --- @return number[]
+        ---@return number[]
         row = function(index) return rows[index] end,
-        --- @return number[]
+        ---@return number[]
         column = function(index)
             return map(rows, function(row) return row[index] end)
         end

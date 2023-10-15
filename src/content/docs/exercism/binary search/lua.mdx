@@ -25,8 +25,8 @@ import { LinkCard } from '@astrojs/starlight/components';
 ### 명령형
 
 ```lua
---- @param array number[] 정렬된 number array table
---- @param target number 찾으려는 숫자
+---@param array number[] 정렬된 number array table
+---@param target number 찾으려는 숫자
 local function binary_search(array, target)
     local left = 1
     local right = #array
@@ -53,8 +53,8 @@ return binary_search
 ### 함수형
 
 ```lua
---- @param array number[] 정렬된 number array table
---- @param target number 찾으려는 숫자
+---@param array number[] 정렬된 number array table
+---@param target number 찾으려는 숫자
 local function binary_search(array, target)
     local function go(left, right)
         if left > right then return -1 end

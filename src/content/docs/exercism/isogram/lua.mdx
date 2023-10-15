@@ -42,7 +42,6 @@ end
 return is_isogram
 
 -- 7 successes / 0 failures / 0 errors / 0 pending : 0.000893 seconds
--- 명령형의 압승
 ```
 
 ### 함수형
@@ -53,15 +52,15 @@ local f = require "fun"
 ---@param s string
 ---@return boolean
 local function is_isogram(s)
-    local target = s:lower():gsub("[^%a]", "")
+	local target = s:lower():gsub('[^%a]', '')
 
-    return not f.any(function(i, c)
-        return target:sub(i + 1):find(c)
-    end, f.enumerate(target))
+	return not f.enumerate(target):some(function(i, c)
+		return target:sub(i + 1):find(c)
+	end)
 end
+
 
 return is_isogram
 
 -- 7 successes / 0 failures / 0 errors / 0 pending : 0.001685 seconds
--- reduce나 재귀를 써서 고성능으로 구현할 수도 있지만, 더 복잡해진다
 ```
