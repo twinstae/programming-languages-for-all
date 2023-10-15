@@ -1,0 +1,67 @@
+---
+title: Binary Search in Lua
+
+sidebar:
+  label: Lua
+  order: 10
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+## 문제
+
+<LinkCard
+  title="Binary Search in Lua"
+  description="You have stumbled upon a group of mathematicians who are also singer-songwriters."
+  href="https://exercism.org/tracks/lua/exercises/binary-search"
+/>
+
+## 참고할 자료와 개념
+
+- [Learn Lua in Y Minutes](https://learnxinyminutes.com/docs/ko-kr/lua-kr)
+
+## 풀이된 예제
+
+### 명령형
+
+```lua
+---@param s string
+---@return boolean
+local function is_isogram(s)
+    local seen = {}
+    for c in s:lower():gmatch "%a" do
+        if seen[c] then
+            return false
+        else
+            seen[c] = true
+        end
+    end
+    return true
+end
+
+return is_isogram
+
+-- 7 successes / 0 failures / 0 errors / 0 pending : 0.000893 seconds
+-- 명령형의 압승
+```
+
+### 함수형
+
+```lua
+local f = require "fun"
+
+---@param s string
+---@return boolean
+local function is_isogram(s)
+    local target = s:lower():gsub("[^%a]", "")
+
+    return not f.any(function(i, c)
+        return target:sub(i + 1):find(c)
+    end, f.enumerate(target))
+end
+
+return is_isogram
+
+-- 7 successes / 0 failures / 0 errors / 0 pending : 0.001685 seconds
+-- reduce나 재귀를 써서 고성능으로 구현할 수도 있지만, 더 복잡해진다
+```
